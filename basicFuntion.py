@@ -3,7 +3,7 @@
 def tmFunction(x):
     return 3 * x + 5
 
-print(tmpFunction(5))
+print (tmFunction(5))
 
 def menuPrint():
     print("=======GAME=======")
@@ -13,8 +13,10 @@ def menuPrint():
     print("==================")
 
 def getRandomWord():
+    import random
     words = ["hang", "pretty", "apple", "ant", "water", "samsung", "MCdonalds", "fluent", "voca", "galaxy"]
-    return words[random.randarge(0, len(words))]
+
+    return words[random.randrange(0, len(words))]
 
 hangman_input_history = []
 
@@ -33,18 +35,27 @@ def runHangMan():
     chance = 7
 
     word = getRandomWord()
+    countCorrectWord = 0
 
 
     while chance > 0:
-        alphabet = gethangmanInput()
+        alphabet = getHangmanInput()
 
-        hangman_input history.append(alphabet)
+        hangman_input_history.append(alphabet)
 
-        if word.find(alphabet) != -1;
+        if word.find(alphabet) != -1:
             print("corret!")
+            countCorrectWord += word.count(alphabet)
+            if countCorrectWord == len(word):
+                print('alive')
+                print("답:", word)
+
+                break
+
         else:
             chance = chance -1
             print("left chance : ", chance)
+
     #1. 모든 정답을 맞췄을때 게임이 끝나지 않음 -> 맞추면 alive  출력해주고 그만하기.
     # -> 맞추면 alive  출력해주고 그만하기  (break문용 사용)
 
@@ -75,11 +86,11 @@ def runUpDown():
 userInput = -1
 
 
-while userInput !=  0;
+while userInput !=  0:
     menuPrint()
     userInput = int(input("select menu ::: "))
 
     if userInput == 1:
         runHangMan()
     elif userInput == 2:
-        runHangMan()
+        runUpDown()
