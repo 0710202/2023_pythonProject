@@ -29,11 +29,11 @@ print(isNotEqual)
 isEqual = numA == 20
 print(isEqual)
 
-isbiggerThan = nuumA >= numB
-isBggerOrEqualThan = num >= 20
+isBiggerThan = numA >= numB
+isBiggerOrEqualThan = numA >= 20
 
 print(isBiggerThan)
-print(isBiggerOrThan)
+print(isBiggerOrEqualThan)
 
 # isSmaillerThan =
 # isSmallerOrEqualThan =
@@ -41,3 +41,8 @@ print(isBiggerOrThan)
 # print(isSmallerThan)
 # print(isSmallerOrEqualThan)
 
+andCondition = numA > 20 and numB > 3
+orCondition = numA > 20 or numB > 3
+
+print(andCondition)
+print(orCondition)
