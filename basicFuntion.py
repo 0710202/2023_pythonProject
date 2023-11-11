@@ -1,10 +1,8 @@
 # f(x) = 3x + 5
-
 def tmFunction(x):
     return 3 * x + 5
-
 print (tmFunction(5))
-
+import random
 def menuPrint():
     print("=======GAME=======")
     print("1. 행맨")
@@ -15,9 +13,7 @@ def menuPrint():
 def getRandomWord():
     import random
     words = ["hang", "pretty", "apple", "ant", "water", "samsung", "MCdonalds", "fluent", "voca", "galaxy"]
-
     return words[random.randrange(0, len(words))]
-
 hangman_input_history = []
 
 def getHangmanInput():
@@ -29,17 +25,6 @@ def getHangmanInput():
                 print("이미 입력한 값입니다. 새로운 알파벳을 입력해주세요.")
             else:
                 return alphabet
-
-def printCorrectWords(word):
-    printStr = ""
-    for i in word;
-        if i in hangman_input_history:
-            printStr = printStr +1
-        else:
-            printStr = printStr + "_"
-        printStr = printStr + " "
-
-    print(printStr)
 
 def runHangMan():
     global hangman_input_history
@@ -54,9 +39,6 @@ def runHangMan():
 
 
     while chance > 0:
-
-        printPresentWords(word)
-
         alphabet = str(getHangmanInput())
 
         hangman_input_history.append(alphabet)
@@ -68,7 +50,7 @@ def runHangMan():
             chance = chance -1
             print("left chance : ", chance)
 
-            if chane == 0:
+            if chance == 0:
                 print("You die")
             else:
                 print("Left CHANCE : ", chance)
@@ -81,22 +63,14 @@ def runHangMan():
 
 
 
-
-
-
-
-
-
-
     #1. 모든 정답을 맞췄을때 게임이 끝나지 않음 -> 맞추면 alive  출력해주고 그만하기.
     # -> 맞추면 alive  출력해주고 그만하기  (break문용 사용)
 
     #2. 내가 맞춘 정답들이 어디에 위치해 있는지 알수없음
     # -> s _ _ s _ _ _ 출력
     # printCorrectWords() 합수를 선언(선택)해서 그 안에서 입력되었던 맞는 항목을 위치에 맞게 선택
-
 def runUpDown():
-    answer = random.randrange(0, 10)
+    answer = random.randrange(1, 10)
     chance = 3
 
     # 사용자가 answer 맞출때까지 반복
@@ -116,12 +90,9 @@ def runUpDown():
             else:
                 print("up")
 userInput = -1
-
-
 while userInput !=  0:
     menuPrint()
-        userInput = int(input("select menu ::: "))
-
+    userInput = int(input("select menu ::: "))
     if userInput == 1:
         runHangMan()
     elif userInput == 2:
