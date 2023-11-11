@@ -30,31 +30,63 @@ def getHangmanInput():
             else:
                 return alphabet
 
+def printCorrectWords(word):
+    printStr = ""
+    for i in word;
+        if i in hangman_input_history:
+            printStr = printStr +1
+        else:
+            printStr = printStr + "_"
+        printStr = printStr + " "
+
+    print(printStr)
+
 def runHangMan():
-    hangman_input_history = [] # 코드 초기화용
+    global hangman_input_history
+
+    # 코드 초기화용
+    hangman_input_history = []
     chance = 7
+    correct = 0
 
     word = getRandomWord()
-    countCorrectWord = 0
+    wordSet = set(word)
 
 
     while chance > 0:
-        alphabet = getHangmanInput()
+
+        printPresentWords(word)
+
+        alphabet = str(getHangmanInput())
 
         hangman_input_history.append(alphabet)
 
         if word.find(alphabet) != -1:
+            correct = correct = +1
             print("corret!")
-            countCorrectWord += word.count(alphabet)
-            if countCorrectWord == len(word):
-                print('alive')
-                print("답:", word)
-
-                break
-
         else:
             chance = chance -1
             print("left chance : ", chance)
+
+            if chane == 0:
+                print("You die")
+            else:
+                print("Left CHANCE : ", chance)
+
+
+        if correct >= len(wordSet):
+            print("alive!")
+            break
+
+
+
+
+
+
+
+
+
+
 
     #1. 모든 정답을 맞췄을때 게임이 끝나지 않음 -> 맞추면 alive  출력해주고 그만하기.
     # -> 맞추면 alive  출력해주고 그만하기  (break문용 사용)
@@ -88,7 +120,7 @@ userInput = -1
 
 while userInput !=  0:
     menuPrint()
-    userInput = int(input("select menu ::: "))
+        userInput = int(input("select menu ::: "))
 
     if userInput == 1:
         runHangMan()
