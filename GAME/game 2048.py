@@ -14,8 +14,14 @@ color = {
     '512': (55, 71, 79),
     '1024': (38, 50, 56),
     '2048': (29, 37, 41),
-
 }
+
+broad = [[-1, -1, -1, -1],
+          [-1, -1, -1, -1],
+          [-1, -1, -1, -1],
+          [-1, -1, -1, -1]]
+
+isGameRunning = True
 
 def initScreen():
     size = (500, 500)
@@ -25,11 +31,42 @@ def initScreen():
     screen.fill(white)
     pygame.display.update()
 
+isGameRunning = True
+
+def setEventListener():
+    for event in pygame.event.get():
+        if event.type ==  pygame.KEYUP:
+            if event.key == pygame.k_q:
+                isGameRunning = False
+            else:
+                print("키보드 키 입력 이벤트가 감지됨")
+
+def drawDisplay():
+    global scereen
+
+    baseX = 35
+    baseY = 35
+    blockSize = (100. 100)
+    margin = 10
+
+    for y in broad:
+        for x in broad[y]:
+            x = (blockWidth + margin) * j + baseX
+            y = (blockHeight + margin) * i + baseY
+            pygame.draw.rect(screen, colors['-1'], [baseX, baseY, blockHeight])
+
+    pygame.display.flip()
+
 
 def run2048():
     pygame.init()
     initScreen()
     print("2048 게임 시작")
+
+    while isGameRunning:
+        setEventListener()
+        drawDisplay()
+
 
     pygame.quit()
 
