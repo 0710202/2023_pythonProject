@@ -23,15 +23,34 @@ broad = [[-1, -1, -1, -1],
 
 isGameRunning = True
 
-def initScreen():
-    size = (500, 500)
+size = (500, 500)
     white = (255, 255, 255)
-    black = (0, 0, 0)
+def initScreen():
+    sereen.fill(colors['white'])
+    pygame.display.update()
+
+
+    black= (0, 0, 0)
     screen = pygame.display.set_mode(size)
     screen.fill(white)
     pygame.display.update()
 
 isGameRunning = True
+
+def setEventListener():
+    global isGameRunning
+    for event in pygame.event.get():
+        if event.type == pygame.KEYUP:
+            if event.key == pygame.K_q:
+                isGameRunning = False
+            elif event == pygame.K_DOWN:
+                print("아래")
+            elif event == pygame.K_UP:
+                print("위")
+            elif event == pygame.K_RIGHT:
+                print("오른쪽")
+            elif event == pygame.K_LEFT:
+                print("왼쪽")
 
 def setEventListener():
     for event in pygame.event.get():
@@ -46,13 +65,17 @@ def drawDisplay():
 
     baseX = 35
     baseY = 35
-    blockSize = (100. 100)
+    blockHeight = 100
+    blockWidth = 100
     margin = 10
 
-    for y in broad:
-        for x in broad[y]:
+    for i in range(4):
+        for j in range(4):
             x = (blockWidth + margin) * j + baseX
             y = (blockHeight + margin) * i + baseY
+            data = str(broad[i][j])
+            if deta == '-1': #데이타가 없을 때
+                pygame.draw.rect(screen,)
             pygame.draw.rect(screen, colors['-1'], [baseX, baseY, blockHeight])
 
     pygame.display.flip()
