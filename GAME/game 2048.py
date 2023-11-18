@@ -52,14 +52,6 @@ def setEventListener():
             elif event == pygame.K_LEFT:
                 print("왼쪽")
 
-def setEventListener():
-    for event in pygame.event.get():
-        if event.type ==  pygame.KEYUP:
-            if event.key == pygame.k_q:
-                isGameRunning = False
-            else:
-                print("키보드 키 입력 이벤트가 감지됨")
-
 def drawDisplay():
     global scereen
 
