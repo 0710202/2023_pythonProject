@@ -1,8 +1,12 @@
+import random
+
 import pygame
 
-color = {
+# 색상 dictionary
+colors = {
     'white': (255, 255, 255),
     'black': (0, 0, 0),
+    '-1': (200, 200, 200),
     '2': (236, 239, 241),
     '4': (207, 216, 220),
     '8': (176, 190, 197),
@@ -16,26 +20,35 @@ color = {
     '2048': (29, 37, 41),
 }
 
-broad = [[-1, -1, -1, -1],
+# 실제 게임 로직이 반영될 보드
+board = [[-1, -1, -1, -1],
           [-1, -1, -1, -1],
           [-1, -1, -1, -1],
           [-1, -1, -1, -1]]
 
-isGameRunning = True
-
+# 화면 관련 설정
 size = (500, 500)
-    white = (255, 255, 255)
-def initScreen():
-    sereen.fill(colors['white'])
-    pygame.display.update()
+screen = pygame.display.set_mode(size)
 
-
-    black= (0, 0, 0)
-    screen = pygame.display.set_mode(size)
-    screen.fill(white)
-    pygame.display.update()
-
+# 게임 진행 flag 변수
 isGameRunning = True
+def initScreen():
+    screen.fill(colors['white'])
+    pygame.display.update()
+
+
+def addNewBlock():
+    canSet = Flase
+
+    while not canSet:
+        randomx = random.randint(0, 4)
+        randomy = random.randint(0, 4)
+
+        if board[randomx][randomy] == -1:
+            canSet = True
+
+    board[randomx][randomy] = 2 if random.randint(1, 10) < 10 else 4
+
 
 def setEventListener():
     global isGameRunning
@@ -43,6 +56,8 @@ def setEventListener():
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 isGameRunning = False
+                return
+
             elif event == pygame.K_DOWN:
                 print("아래")
             elif event == pygame.K_UP:
@@ -52,8 +67,10 @@ def setEventListener():
             elif event == pygame.K_LEFT:
                 print("왼쪽")
 
+            addNewblock
+
 def drawDisplay():
-    global scereen
+    global screen
 
     baseX = 35
     baseY = 35
@@ -65,13 +82,13 @@ def drawDisplay():
         for j in range(4):
             x = (blockWidth + margin) * j + baseX
             y = (blockHeight + margin) * i + baseY
-            data = str(broad[i][j])
-            if deta == '-1': #데이타가 없을 때
-                pygame.draw.rect(screen,)
-            pygame.draw.rect(screen, colors['-1'], [baseX, baseY, blockHeight])
+            data = str(board[i][j])
+            if data == '-1':  # 데이터가 없을때
+                pygame.draw.rect(screen, colors[data], [x, y, blockWidth, blockHeight], 2)  # outlined rect
+            else:
+                pygame.draw.rect(screen, colors[data], [x, y, blockWidth, blockHeight])  # filled rect
 
-    pygame.display.flip()
-
+    pygame.display.flip()  # 화면 다시그리기
 
 def run2048():
     pygame.init()
@@ -81,7 +98,6 @@ def run2048():
     while isGameRunning:
         setEventListener()
         drawDisplay()
-
 
     pygame.quit()
 
