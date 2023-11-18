@@ -53,6 +53,7 @@ def addNewBlock():
 def setEventListener():
     global isGameRunning
     for event in pygame.event.get():
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
                 isGameRunning = False
@@ -67,7 +68,7 @@ def setEventListener():
             elif event == pygame.K_LEFT:
                 print("왼쪽")
 
-            addNewblock
+            addNewblock()
 
 def drawDisplay():
     global screen
