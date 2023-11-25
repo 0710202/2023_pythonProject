@@ -1,6 +1,5 @@
-import random
-
 import pygame
+import random
 
 # 색상 dictionary
 colors = {
@@ -32,27 +31,32 @@ screen = pygame.display.set_mode(size)
 
 # 게임 진행 flag 변수
 isGameRunning = True
+
+
 def initScreen():
     screen.fill(colors['white'])
     pygame.display.update()
 
 
 def addNewBlock():
-    canSet = Flase
+    canSet = False
 
     while not canSet:
-        randomx = random.randint(0, 4)
-        randomy = random.randint(0, 4)
+        randomX = random.randint(0, 3)
+        randomY = random.randint(0, 3)
 
-        if board[randomx][randomy] == -1:
+        if board[randomX][randomY] == -1:
             canSet = True
 
-    board[randomx][randomy] = 2 if random.randint(1, 10) < 10 else 4
-
+    board[randomX][randomY] = 2 if random.randint(1, 10) < 10 else 4  # 10분의 1 확률로 4, 이외에는 2가 추가되도록
 
 def setEventListener():
     global isGameRunning
     for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            isGameRunning = False
+            return
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
@@ -68,7 +72,12 @@ def setEventListener():
             elif event == pygame.K_LEFT:
                 print("왼쪽")
 
-            addNewblock()
+            addNewBlock()
+
+    def push_zeros_to_end(line):
+        zeros = [0] * line.count(0)
+        non_zeros = [num for num in line if num != 0]
+        return non_zeros + zeros
 
 def drawDisplay():
     global screen
@@ -90,6 +99,7 @@ def drawDisplay():
                 pygame.draw.rect(screen, colors[data], [x, y, blockWidth, blockHeight])  # filled rect
 
     pygame.display.flip()  # 화면 다시그리기
+
 
 def run2048():
     pygame.init()
